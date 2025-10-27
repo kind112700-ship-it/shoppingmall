@@ -29,60 +29,52 @@ import AdminProductEdit from './pages/AdminProductEdit';
 
 
 function App() {
+    // ⭐️ 핵심 수정: <Router> 태그를 제거했습니다. 이제 <Routes>만 남습니다.
     return (
-      <Router>
-            
+        <>
             <Routes>
-                {/* ⭐️ 1. Layout을 최상위 Route로 설정합니다. */}
+                
+                {/* =================================================== */}
+                {/* 1. 사용자 페이지 (Layout 적용) */}
+                {/* =================================================== */}
                 <Route path="/" element={<Layout />}> 
                     
-                    {/* 2. 모든 실제 페이지를 Layout의 자식 Route로 배치합니다. */}
-                    {/* path="/" 는 메인 페이지이므로 index={true} 또는 path="/" 로 설정 */}
-                    <Route index element={<HomePage />} />                  
-                   
+                    {/* 메인 페이지 */}
+                    <Route index element={<HomePage />} /> 
                     
-                    {/* 로그인/회원가입 페이지 */}
+                    {/* 사용자/쇼핑 관련 페이지 */}
                     <Route path="login" element={<LoginPage />} />
-                    
-                    {/* 마이페이지 */}
                     <Route path="mypage" element={<MyPage />} />
-                    
-                    {/* 장바구니 */}
                     <Route path="cart" element={<CartPage />} />
-                    
-                    {/* ⭐️ 상품 상세 페이지 경로 추가 (ID를 매개변수로 받음) */}
                     <Route path="product/:id" element={<ProductDetailPage />} />
                     <Route path="checkout" element={<CheckoutPage />} />
-                    {/* ⭐️ 1. 주문 완료 페이지 (단건 확인) */}
-                     <Route path="order-complete/:orderId" element={<OrderCompletePage />} />
-                     {/* ⭐️ 2. 나의 주문 내역 페이지 (목록 조회) */}
+                    
+                    {/* 주문 및 마이페이지 상세 */}
+                    <Route path="order-complete/:orderId" element={<OrderCompletePage />} />
                     <Route path="my-orders" element={<MyOrdersPage />} />
-                    {/* 2. 주문 상세 페이지 (OrderDetailPage) - 주문 ID를 파라미터로 받음 */}
                     <Route path="my-orders/:orderId" element={<OrderDetailPage />} />
                 </Route>
 
                 {/* =================================================== */}
                 {/* 2. 관리자 페이지 (Layout 미적용 - 독립적 UI) */}
                 {/* =================================================== */}
-                {/* AdminDashboard는 원래 Layout 안에 있었지만, 독립적인 UI를 위해 밖으로 꺼냅니다. */}
                 {/* 관리자 대시보드 페이지 */}
-                    <Route path="admin" element={<AdminDashboard />} /> 
+                <Route path="admin" element={<AdminDashboard />} /> 
                 
-                {/* ⭐️ 추가된 관리자 페이지 라우트 */}
-                <Route path="/admin/products" element={<AdminProducts />} />
-                <Route path="/admin/orders" element={<AdminOrders />} />
-                <Route path="/admin/customers" element={<AdminCustomers />} />
-                <Route path="/admin/settings" element={<AdminSettings />} />
-                <Route path="/admin/products/add" element={<AdminProductAdd />} />
-                <Route path="/admin/products/edit/:id" element={<AdminProductEdit />} />
+                {/* ⭐️ 관리자 페이지 라우트 (경로에서 '/'를 제거하여 통일했습니다) */}
+                <Route path="admin/products" element={<AdminProducts />} />
+                <Route path="admin/orders" element={<AdminOrders />} />
+                <Route path="admin/customers" element={<AdminCustomers />} />
+                <Route path="admin/settings" element={<AdminSettings />} />
+                <Route path="admin/products/add" element={<AdminProductAdd />} />
+                <Route path="admin/products/edit/:id" element={<AdminProductEdit />} />
                 
-                {/* 만약 Header가 없는 특별한 페이지(예: 전체화면 결제 페이지)가 필요하다면
-                   Layout 밖에 별도의 Route로 정의할 수 있습니다. */}
+                {/* 3. 404 Not Found 페이지 - 컴포넌트가 없으므로 임시 주석 처리 */}
+                {/* <Route path="*" element={<NotFoundPage />} /> */}
 
             </Routes>
-        </Router>
-
+        </>
     );
 };
-  
+ 
 export default App;
