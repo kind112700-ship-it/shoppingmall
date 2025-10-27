@@ -1,7 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
-const app = express();
+// const app = express();
 // const PORT = 4000; // ⭐️ Vercel에서는 이 상수가 필요 없습니다.
 
 
@@ -21,6 +21,15 @@ app.use(session({
     cookie: { maxAge: 1000 * 60 * 60 * 24 }
 }));
 
+const express = require('express');
+const app = express();
+// ... (다른 미들웨어 설정)
+
+// ⭐️ 디버깅용 임시 라우트 추가
+app.post('/api/test-order', (req, res) => {
+    console.log("디버깅용 POST 요청 수신 완료!");
+    res.status(200).json({ success: true, message: "테스트 통과" });
+});
 
 // ----------------------------------------------------
 // ⭐️ 0. 이미지 경로 상수 (ProductDetailPage와 동일하게 가정)
