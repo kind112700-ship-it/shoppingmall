@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { API_BASE_URL } from '../api/config';
+import axios from 'axios';
 import { CartItemType } from '../types';
 // import { getCartItems, saveCartItems } from '../utils/cart'; 
 import '../styles/Checkout.css';
@@ -120,41 +122,38 @@ const CheckoutPage: React.FC = () => {
             finalTotal: finalTotal, 
         };
 
-        try {
-            // 2. 서버의 주문 API (/api/order) 호출
-            const response = await fetch('/api/order', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(orderData),
-            });
+       try {
+    // 2. 서버의 주문 API (/api/order) 호출
+    // 🚨 핵심 수정: fetch 경로에 API_BASE_URL을 붙여서 Vercel 서버로 요청이 가도록 합니다.
+    const response = await fetch(`${API_BASE_URL}/api/order`, { 
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderData),
+    });
 
-            const result = await response.json();
-
-            if (result.success) {
-                // 3. 주문 성공 처리 및 주문 완료 페이지로 이동
-                alert(`✅ 주문이 완료되었습니다! 총 ${formatNumber(result.orderTotal)}원 결제 (주문 번호: ${result.orderId})`);
-                
-                // 4. 주문 완료 페이지로 이동 (주문 번호와 상세 정보를 전달)
-                navigate(`/order-complete/${result.orderId}`, { 
-                    state: { 
-                        orderDetails: orderData, 
-                        orderId: result.orderId,
-                        finalTotal: finalTotal 
-                    } 
-                });
-
-                // 🚨 서버에서 장바구니를 비웠으므로 클라이언트의 로컬 상태는 무시합니다.
-                // window.dispatchEvent(new Event('cartUpdated')); // 헤더 카트 아이콘 업데이트용으로 필요하다면 유지
-                
-            } else {
-                alert('주문 처리 중 문제가 발생했습니다: ' + result.message);
-            }
-        } catch (error) {
-            console.error("주문 API 통신 오류:", error);
-            alert('주문 처리 중 서버 통신에 실패했습니다. 서버를 확인해주세요.');
-        } finally {
-            setIsSubmitting(false);
-        }
+    // fetch는 HTTP 오류 코드(4xx, 5xx)가 발생해도 catch로 가지 않고 정상 응답으로 처리합니다.
+    // 따라서 수동으로 오류를 체크해야 합니다.
+    if (!response.ok) {
+        // 405, 404와 같은 오류가 발생하면 이 블록으로 들어옵니다.
+        const errorText = await response.text(); // 오류 응답 내용을 텍스트로 읽습니다.
+        throw new Error(`주문 API 요청 실패: ${response.status} ${response.statusText}. 응답 내용: ${errorText.substring(0, 100)}...`);
+    }
+    
+    // ... (나머지 성공 로직은 동일)
+    const result = await response.json(); 
+    
+    if (result.success) {
+        // ... (성공 처리)
+    } else {
+        alert('주문 처리 중 문제가 발생했습니다: ' + result.message);
+    }
+} catch (error) {
+    console.error("주문 API 통신 오류:", error);
+    // 🚨 이제는 SyntaxError 대신 더 명확한 오류 메시지가 출력될 것입니다.
+    alert('주문 처리 중 서버 통신에 실패했습니다. 상세 오류를 콘솔에서 확인해주세요.');
+} finally {
+    setIsSubmitting(false);
+}
     };
 
 
