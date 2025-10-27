@@ -1,0 +1,313 @@
+/* src/styles/ProductDetail.css (세련된 미니멀 디자인) */
+
+/* -------------------- 전역 설정 -------------------- */
+.product-detail-container {
+    max-width: 1100px;
+    margin: 60px auto; /* 상하 여백 증가 */
+    padding: 100px 30px;
+    background-color: #ffffff;
+    font-family: 'Pretendard', sans-serif; /* 세련된 폰트 가정 */
+}
+
+.product-info-top {
+    display: flex;
+    gap: 70px; /* 섹션 간 간격 증가 */
+    margin-bottom: 60px;
+}
+
+/* -------------------- 1. 이미지 영역 (Gallery) -------------------- */
+.product-image-area {
+    flex: 1.2; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.main-product-image {
+    width: 100%;
+    max-width: 650px; 
+    aspect-ratio: 4/5; /* 이미지 비율 고정 (세로형 의류에 적합) */
+    object-fit: cover;
+    border-radius: 4px; /* 최소한의 둥근 모서리 */
+    margin-bottom: 15px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* 은은하고 고급스러운 그림자 */
+}
+
+/* 썸네일 갤러리 */
+.thumbnail-gallery {
+    display: flex;
+    gap: 10px; 
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 5px 0;
+}
+
+.thumbnail-image {
+    width: 60px; /* 썸네일 크기 조정 (더 작고 세련되게) */
+    height: 60px; 
+    object-fit: cover;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.thumbnail-image:hover {
+    border-color: #333;
+    opacity: 0.8;
+}
+
+.thumbnail-image.selected {
+    border: 2px solid #000; /* 선택 시 검정색으로 명확하게 강조 */
+    transform: scale(1.05); /* 선택된 썸네일만 살짝 확대 */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+
+/* -------------------- 2. 상세 정보 영역 -------------------- */
+.product-details-area {
+    flex: 1;
+    padding-top: 5px; /* 이미지와 수평 정렬을 위해 살짝 내림 */
+}
+.productarea-name {
+    font-size: 38px;
+    font-weight: 800; /* 매우 굵게 */
+    margin-bottom: 5px;
+    color: #111;
+    letter-spacing: -0.5px; /* 글자 간격 조정 */
+}
+
+.productarea-price {
+    font-size: 30px;
+    font-weight: 700;
+    color: #c00; /* 빨간색 유지 (할인가 느낌) */
+    margin-bottom: 30px;
+}
+
+.product-description {
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    padding: 15px 0;
+    border-top: 1px solid #f0f0f0; /* 얇고 밝은 구분선 */
+    border-bottom: 1px solid #f0f0f0;
+}
+
+hr {
+    display: none; /* hr 태그는 사용하지 않음 */
+}
+
+/* -------------------- 3. 옵션 선택 -------------------- */
+.option-group {
+    margin-bottom: 25px;
+}
+
+.option-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+/* 사이즈 버튼 */
+.option-button {
+    padding: 9px 18px; /* 패딩 증가 */
+    margin-right: 6px;
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 20px; /* 캡슐 형태 디자인 */
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.option-button:hover:not(.selected) {
+    background-color: #f8f8f8;
+    border-color: #999;
+}
+
+.option-button.selected {
+    background-color: #000; /* 선택 시 블랙 배경 */
+    color: white;
+    border-color: #000;
+    font-weight: 600;
+}
+
+/* 색상 선택 스와치 */
+.color-swatches {
+    display: flex;
+}
+
+.color-swatch-button {
+    width: 35px; /* 크기 증가 */
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 12px;
+    cursor: pointer;
+    border: 1px solid #ddd; /* 기본 테두리 */
+    transition: all 0.2s;
+}
+
+.color-swatch-button.selected {
+    border: 3px solid #000; /* 검정색 테두리로 명확히 강조 */
+    box-shadow: 0 0 0 2px #fff inset; /* 내부 흰색 테두리로 스와치 분리 */
+    transform: scale(1.1);
+}
+
+/* 수량 조절 */
+.quantity-control-detail {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.quantity-control-detail .input-group {
+    display: flex;
+    width: 140px; /* 너비 증가 */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.quantity-control-detail input {
+    width: 50px;
+    text-align: center;
+    border: none;
+    padding: 8px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.quantity-control-detail button {
+    width: 45px;
+    padding: 8px 0;
+    border: none;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 18px;
+    color: #555;
+    transition: background-color 0.2s;
+}
+
+.quantity-control-detail button:hover:not(:disabled) {
+    background-color: #eee;
+    color: #000;
+}
+
+.quantity-control-detail button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+
+/* -------------------- 4. 최종 금액 및 액션 버튼 -------------------- */
+.final-price-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 30px 0;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.final-price-value {
+    color: #000; /* 최종 금액은 블랙으로 고급스럽게 */
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-buttons button {
+    flex: 1;
+    padding: 18px 0; /* 패딩 증가 */
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid #000; /* 모든 버튼에 기본 테두리 설정 */
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.add-to-cart-btn {
+    background-color: #fff;
+    color: #333;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #f5f5f5;
+}
+
+.buy-now-btn {
+    background-color: #000; /* 메인 액션 버튼은 블랙 */
+    color: white;
+}
+
+.buy-now-btn:hover {
+    background-color: #333;
+}
+
+/* -------------------- 5. 상품 상세 설명 (하단 영역) -------------------- */
+.product-description-bottom {
+    max-width: 900px;
+    margin: 50px auto 0 auto;
+    padding: 40px 0;
+    border-top: 2px solid #000; /* 하단 상세 정보 시작을 두꺼운 선으로 강조 */
+}
+
+.product-description-bottom h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #222;
+}
+
+/* -------------------- 모바일 반응형 -------------------- */
+@media (max-width: 768px) {
+    .product-detail-container {
+        margin: 30px auto;
+        padding: 0 15px;
+    }
+    .product-info-top {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .product-details-area {
+        padding-top: 0;
+    }
+
+    .product-name {
+        font-size: 1.5rem;
+    }
+    .product-price {
+        font-size: 1.2rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .action-buttons button {
+        width: 100%;
+        padding: 15px 0;
+        border-radius: 4px;
+    }
+    
+    .final-price-area {
+        font-size: 16px;
+    }
+    .final-price-value {
+        font-size: 24px;
+    }
+
+    .thumbnail-gallery {
+        justify-content: center; /* 모바일에서 썸네일 가운데 정렬 */
+    }
+}

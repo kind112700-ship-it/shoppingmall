@@ -1,0 +1,691 @@
+/* 기본 스타일 초기화 및 폰트 설정 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body {
+  
+    color: #333; 
+    background-color: #F8F8F8; /* 아주 연한 배경색 */
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: #555;
+}
+
+a:hover {
+    color: #FFC0CB; /* 주조색의 연한 버전 */
+}
+
+/* 🎨 색상 변수 설정 */
+:root {
+    --primary-pastel: #FFC0CB; /* 블러시 핑크 (주조색/버튼) */
+    --secondary-pastel: #FEE7F2; /* 더 연한 핑크 (카테고리/위젯 배경) */
+    --accent-gold: #B8860B; /* 강조색 (관리자/가격/카운트) */
+    --light-gray: #EEE; /* 구분선 */
+    --dark-text: #333; /* 짙은 텍스트 */
+    --content-max-width: 1200px; /* 콘텐츠 중앙 정렬을 위한 최대 너비 설정 */
+}
+
+/* 햄버거 메뉴 (모바일 전용) */
+.sidebar-menu {
+    height: 100%;
+    width: 0; 
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    background-color: var(--secondary-pastel); 
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    border-right: 1px solid var(--light-gray);
+}
+.sidebar-menu .close-btn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    border: none;
+    background: none;
+    color: var(--dark-text);
+    cursor: pointer;
+}
+.sidebar-menu .menu-header, .sidebar-menu .menu-footer {
+    padding: 15px 25px;
+    border-bottom: 1px solid var(--light-gray);
+}
+.sidebar-menu .menu-header { border-top: 1px solid var(--light-gray); }
+
+.sidebar-menu .main-menu-vertical li a {
+    padding: 0px 25px;
+    display: block;
+    color: var(--dark-text);
+    font-weight: 500;
+}
+.sidebar-menu .main-menu-vertical li a:hover {
+    background-color: var(--primary-pastel);
+    color: white;
+}
+.admin-link-mobile {
+    color: var(--accent-gold);
+    display: block;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+
+/* 전체 페이지 컨테이너 이동 애니메이션 */
+#page-container {
+    transition: margin-left .5s;
+}
+
+/* ⭐️ 1. 첫 번째 줄: 공지/쿠폰 바 (Top Announcement Bar) */
+/* ---------------------------------------------------- */
+.top-announcement-bar {
+    width: 100%;
+    /* 핑크 배경색 적용 */
+    background-color: #333;     
+    text-align: center;    
+    /* 상하 패딩 10px 적용 */
+    padding: 10px 0;     
+}
+.top-announcement-bar p{
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* 1. 상단 섹션: 헤더 (네비게이션 바) 스타일 */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: white; 
+    border-bottom: 1px solid var(--light-gray);
+    position: sticky;
+    top: 0;
+    z-index: 500;
+}
+/* 헤더 내부 콘텐츠 중앙 정렬 및 최대 너비 설정 */
+
+.logo a {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--dark-text); 
+}
+.hamburger-btn {
+    display: none; 
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-right: 20px;
+    color: var(--dark-text);
+}
+
+.search-bar-container {
+    flex-grow: 1;
+    max-width: 500px;
+    display: flex;
+    border: 1px solid var(--light-gray);
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 0 50px; /* 검색창 양쪽 여백 추가 */
+}
+.search-bar-container>input{
+    border: none;
+    text-align: center;
+    width: 100%;
+     padding: 8px 13px;
+}
+.search-bar-container>input:focus{
+    outline: none;    
+}
+
+.search-bar-container>button{
+    background-color: var(--secondary-pastel); /* 버튼 배경에 연한 파스텔톤 적용 */
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    color: var(--dark-text);
+    transition: background-color 0.3s;    
+    margin-left: auto;
+}
+/* 관리자 버튼 스타일 */
+.admin-link-desktop {
+    color: var(--accent-gold); 
+    font-weight: bold;
+    font-size: 0.9em;
+    margin-left: 15px;
+}
+
+.cart-count {
+    background-color: var(--accent-gold); 
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.7em;
+    margin-left: 4px;
+}
+
+/* 2. 중간 섹션 1: 카테고리 (가로 풀 위스) */
+.full-width-category-nav {
+    width: 100%;
+    background-color: white;
+    border-bottom: 1px solid var(--light-gray);
+    z-index: 400;
+    position:relative;
+}
+
+.full-width-category-nav.fixed{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color:var(--light-gray);
+}   
+.full-width-category-nav::after {
+    height: 180px;
+}
+
+.full-width-category-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center; /* 메뉴 중앙 정렬 */
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+}
+
+.full-width-category-nav ul li a {
+    padding: 10px 30px;
+    display: block;
+    color: var(--dark-text);
+    font-weight: 500;
+    font-size: 0.7rem;
+}
+.full-width-category-nav ul li a:hover {
+    color: var(--primary-pastel);
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+/* ---------------------------------------------------- */
+/* ⭐️ 2. 두 번째 줄: 유틸리티 및 검색 (Utility Bar) */
+/* ---------------------------------------------------- */
+.utility-bar {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    /* 배경색 투명 (기본 페이지 배경색 F8F8F8 사용) */
+    background-color: white;
+    /* 상하 패딩 10px 적용 */
+    padding: 10px 30px; 
+    border-bottom: 1px solid var(--light-gray);    
+}
+
+/* 유틸리티 영역 (좌측 정렬) */
+.nav-left-utility {
+    display: flex;
+    align-items: center;
+    /* 좌측 영역에 테두리 적용 */
+    border-right: 1px solid var(--light-gray); 
+    padding-right: 20px;
+    width: 350px;
+   
+}
+
+.nav-left-utility .nav-link {
+    margin-right: 15px;
+    font-size: 0.8rem;
+    color: var(--dark-text);
+    margin: 0 auto;
+}
+
+/* 로고/버튼과 검색창의 중앙 정렬을 위한 스페이서 */
+.nav-right-spacer {
+    width: 300px; /* nav-left-utility와 비슷한 너비로 설정 (나중에 모바일에서 제거) */
+}
+
+
+/* 검색창 컨테이너 (중앙 배치) */
+.search-bar-container {
+    flex-grow: 1; /* 남은 공간을 채우려고 하지만... */
+    max-width: 400px; /* ...너비를 제한하고 중앙에 배치 */
+    display: flex;
+    width: 100%;
+    order: 3;   
+    /* 검색창 컨테이너에 테두리 적용 */
+    border: 1px solid var(--light-gray); 
+    border-radius: 5px;
+    margin: 0;
+    margin-left: auto;
+    height: 40px;
+    background-color: transparent; /* 배경 투명 */
+}
+
+/* 검색 입력 필드 */
+.search-input {
+    border: none;
+    text-align: center;
+    padding: 8px 15px;
+    width: 100%;
+    font-size: 0.9em;
+    background-color: #F9F9F9;
+    text-align: center;
+}
+/* 검색 버튼은 오른쪽 끝에 붙임 */
+.search-btn {
+    margin-left: auto; 
+    background-color: var(--secondary-pastel); 
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    color: var(--dark-text);
+}
+/* ---------------------------------------------------- */
+/* ⭐️ 3. 세 번째 줄: 로고 바 (Logo Bar) */
+/* ---------------------------------------------------- */
+.logo-bar {
+    text-align: center;
+    /* 배경색 투명 */
+    background-color: transparent; 
+    padding-bottom: 20px; /* 상하 패딩으로 높이 조절 */
+    border-bottom: 1px solid var(--light-gray); /* 하단 구분선 */
+}
+
+.logo a {
+    font-size: 1.5rem; /* 로고 크기 강조 */
+    font-weight: 600;
+    color: var(--dark-text); 
+}
+.logo a:hover{
+    font-weight: 800;
+}
+
+/* ⭐️ 4. 풀 위스 이미지 슬라이드 섹션 스타일 (추가) */
+/* ---------------------------------------------------- */
+.full-width-slider-section {
+    position: relative; /* 화살표, 점 위치 지정을 위한 기준 */
+    overflow: hidden; /* 슬라이드 컨테이너 밖으로 나가는 슬라이드 숨김 */
+    width: 100%;
+    height: 500px; /* 원하는 슬라이드 높이 설정 (조절 가능) */
+}
+
+.slider-container {
+    display: flex; /* 슬라이드들을 가로로 나열 */
+    width: 400%; /* 슬라이드가 3개이므로 300% */
+    height: 500px;
+    transition: transform 0.5s ease-in-out; /* 슬라이드 애니메이션 효과 */
+}
+
+/* ⭐️ 슬라이드 내용 스타일 (이미지 위에 텍스트가 잘 보이도록) ⭐️ */
+.slide {
+   position: relative;
+   width: 100%;
+   height: 500px;
+   /* display: none; */
+}
+/* .slide:first-child{
+    display: block;
+} */
+.slide h2{
+    position: absolute;
+    width: 350px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    background-color: rgba(170, 170, 170,0.5);
+    border-radius: 10px;
+    font-size: 1rem !important; 
+    right: 5%;
+    bottom: 10%;
+    color: rgb(192, 191, 191);
+}
+.slide h2:hover{
+    background-color:rgba(128, 128, 128, 0.74) ;
+    color: #FFC0CB;
+}
+.slide>img{
+    /* object-fit: fill; */
+    width: 100%;
+    height: 500px;
+}
+
+
+/* ⭐️ 화살표 및 점 스타일 ⭐️ */
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    padding: 15px 10px;
+    cursor: pointer;
+    z-index: 20;
+    font-size: 24px;
+    border-radius: 5px;
+}
+
+.left-arrow {
+    left: 10px;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+}
+
+.dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.dot.active {
+    background: #fff;
+}
+
+/* 3. 중간 섹션 2: 메인 콘텐츠 (상품 그리드) */
+.main-content-full {
+    width: 100%;
+    padding: 40px 0;
+    background-color: white;
+}
+/* 콘텐츠 내부의 최대 너비 설정 */
+.main-content-full h2 {
+    max-width: var(--content-max-width);
+    margin: 0 auto 20px;
+    padding: 0 20px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4열 그리드 */
+    gap: 30px;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.product-card {
+    border: 1px solid var(--light-gray);
+    border-radius: 5px;
+    padding: 15px;
+    text-align: center;
+    background-color: white;
+    transition: transform 0.3s;
+    
+}
+.product-card:hover {
+    transform: translateY(-5px); /* 호버 효과로 세련됨 추가 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+.product-image {
+    object-fit: cover;
+    height: 200px;
+    background-color: #F3F3F3; 
+    margin-bottom: 10px;
+    /* display: flex; */
+    /* align-items: center;
+    justify-content: center; */
+    color: #AAA;
+    
+}
+.product-link-area {
+    text-decoration: none; /* Link의 기본 밑줄 제거 */
+    color: inherit; /* 텍스트 색상 상속 */
+    display: block; /* 전체 영역 클릭 가능하도록 블록 요소로 */
+    flex-grow: 1; /* 남은 공간을 차지 */
+    margin-bottom: 10px; /* 버튼과의 간격 */
+    
+}
+
+.product-price {
+    color: var(--accent-gold); 
+    font-weight: bold;
+    margin-bottom: 10px;
+    
+}
+
+/* CTA 버튼 (주조색 적용) */
+
+.cta-button {
+    background-color: var(--primary-pastel); 
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+.detail-button{
+    margin-right: 5px;
+    background-color: #AAA;
+}
+.cta-button:hover {
+    background-color: #FF8BAA; 
+}
+.detail-button:hover{
+     background-color:#797878;
+}
+
+
+/* 4. 하단 섹션: 나의 쇼핑 및 푸터 */
+.footer-container {
+    background-color: #FFF;
+    border-top: 1px solid var(--light-gray);
+    /* ⭐️ 변경: 컨테이너 상단 패딩은 내부 섹션에서 처리 */
+}
+
+.my-shopping-section {
+    display: flex;
+    justify-content: flex-start;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 20px 15px; /* ⭐️ 축소: 30px -> 20px, 20px -> 15px */
+}
+
+.shopping-widget {
+    flex-basis: 25%;
+    margin-right: 30px; /* ⭐️ 축소: 40px -> 30px */
+}
+
+.shopping-widget h2 {
+    font-size: 1.0em; /* ⭐️ 축소: 1.1em -> 1.0em */
+    margin-bottom: 5px; /* ⭐️ 축소: 10px -> 5px */
+    border-bottom: 1px solid var(--light-gray);
+    padding-bottom: 3px; /* ⭐️ 축소: 5px -> 3px */
+}
+
+/* 위젯 내부 일반 텍스트는 0.8em 정도로 자동 적용되도록 별도 p 스타일은 제거 */
+/* (만약 p 태그에 별도 스타일이 있다면 그 부분도 축소해야 합니다.) */
+
+.mini-product {
+    height: 35px; /* ⭐️ 축소: 50px -> 35px */
+    background-color: #F3F3F3;
+    margin-top: 3px; /* ⭐️ 축소: 5px -> 3px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #AAA;
+    font-size: 0.8em; /* ⭐️ 위젯 내부에 맞춰 폰트 사이즈 조정 */
+}
+
+.phone-number {
+    font-weight: bold;
+    color: var(--accent-gold);
+    font-size: 1.0em; /* ⭐️ 축소: 1.1em -> 1.0em */
+}
+
+footer {
+    text-align: center;
+    padding: 12px; /* ⭐️ 축소: 20px -> 12px */
+    border-top: 1px solid var(--light-gray);
+    color: #999;
+    font-size: 0.75em; /* ⭐️ 축소: 0.8em -> 0.75em */
+    background-color: #F8F8F8;
+}
+
+
+/* ⭐️ h2 밑줄 제거 규칙 수정 (JSX 구조에 맞게 .footer 제거) */
+/* 이 규칙이 작동하지 않았으므로, h2의 기본 스타일로 충분합니다. */
+/* 만약 이 스타일이 다른 h2를 덮어써서 밑줄이 계속 생긴다면 아래 코드를 사용: */
+/*
+.shopping-widget h2 {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 5px;  
+}
+*/
+
+
+/* 📱 반응형 디자인 (모바일, 768px 이하 적용) */
+@media (max-width: 768px) {
+    /* 네비게이션 바 변경 */
+    .navbar {
+        padding: 10px 15px;
+    }
+    .search-bar-container {
+        display: none; 
+    }
+    .nav-right .admin-link-desktop, 
+    .nav-right .nav-link:first-child {
+        display: none; 
+    }
+    .hamburger-btn {
+        display: block;
+    }
+
+    /* 카테고리 메뉴 숨김 (햄버거 메뉴로 대체) */
+    .full-width-category-nav {
+        display: none;
+    }
+
+    /* ... (슬라이드) ... */
+    
+    .full-width-slider-section {
+        height: 200px; /* 모바일에서는 높이를 줄여 화면 공간 확보 */
+        margin: 20px 0;
+    }
+    .slide-content h2 {
+        font-size: 1.2em;
+    }
+    .slider-cta {
+        font-size: 0.9em;
+        padding: 8px 20px;
+    }
+    .slider-arrow {
+        padding: 10px;
+    }
+    /* ... (나머지 모바일 스타일 유지) ... */
+
+    /* 메인 콘텐츠 */
+    .main-content-full {
+        padding: 20px 0;
+    }
+    .main-content-full h2 {
+        padding: 0 10px;
+        margin-bottom: 15px;
+    }
+
+    /* 상품 그리드 조정 */
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 10px;
+        padding: 0 10px;
+        
+    }
+    .product-image {
+        height: 120px;
+    }
+    
+
+    /* 하단 섹션 (나의 쇼핑) */
+    .my-shopping-section {
+        flex-direction: column;
+        padding: 20px 10px;
+    }
+    .shopping-widget {
+        flex-basis: 100%;
+        margin-right: 0;
+        margin-bottom: 15px;        
+    }
+    /* 공지 바: 폰트 크기 조정 */
+    .top-announcement-bar p {
+        font-size: 0.75em;
+    }
+    
+    /* 유틸리티 바: 햄버거 버튼만 남기고 요소 숨김 */
+    .utility-bar {
+        padding: 10px 15px;
+    }
+    
+    .utility-bar .nav-link,
+    .utility-bar .admin-link-desktop,
+    .search-bar-container,
+    .nav-right-spacer {
+        display: none; /* 관리자, 로그인, 검색창 숨김 */
+    }
+    
+    .nav-left-utility {
+        border-right: none; /* 테두리 제거 */
+        padding-right: 0;
+    }
+    
+    .hamburger-btn {
+        display: block; /* 햄버거 버튼 보이기 */
+        margin-right: 10px;
+    }
+    
+    /* 로고 바: 패딩 조정 */
+    .logo-bar {
+        padding: 10px 0;
+    }
+    .logo a {
+        font-size: 1.2rem;
+    }
+    .search-bar-container {
+        display: flex; /* 다시 보이게 함 */
+        flex-grow: 1; /* 남은 공간을 최대한 차지 */
+        max-width: none; /* 최대 너비 제한 해제 */
+        margin: 0 10px 0 0; /* 우측에 작은 여백만 유지 */
+        height: 35px; /* 모바일에 맞게 높이 약간 줄임 */
+        border: 1px solid var(--light-gray); /* 테두리 유지 */
+        
+    }
+    
+    /* 검색 입력 필드의 중앙 정렬을 해제하고 왼쪽 정렬로 변경 (좁은 화면에서는 좌측 정렬이 더 깔끔함) */
+    .search-input {
+        text-align: left; /* 좌측 정렬로 변경 */
+        padding: 0 10px; /* 패딩 조정 */
+    }
+    
+    /* 검색 버튼 크기 조정 */
+    .search-btn {
+        padding: 0 10px;
+    }
+  
+        
+}

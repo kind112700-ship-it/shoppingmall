@@ -1,0 +1,314 @@
+
+
+/*
+ * ----------------------------------------------------
+ * CheckoutPage 전체 스타일
+ * ----------------------------------------------------
+ */
+
+/* ⭐️ 메인 색상 팔레트: 
+ * - Primary Accent (강조): #D98880 (테라코타)
+ * - Secondary Accent (버튼 hover): #C06C84 (톤 다운된 핑크)
+ * - Text / Base (기본 텍스트): #4A4A4A (진한 웜 그레이)
+ * - Background (배경): #F7F3F0 (따뜻한 베이지)
+ * - Border / Card BG (경계선/카드 배경): #FFFFFF / #EAE0D7
+ */
+
+/* 컨테이너 기본 레이아웃 */
+.checkout-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.checkout-header {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: #4A4A4A; /* 진한 웜 그레이 */
+    border-bottom: 3px solid #D98880; /* ⭐️ 테라코타 강조선 */
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+/* 메인 콘텐츠 (좌우 분할) */
+.checkout-content {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* 좌측 영역 (배송지, 상품, 결제 수단) */
+.main-order-info-area {
+    flex: 2;
+    min-width: 0;
+}
+
+/* 우측 영역 (순수 요약) */
+.order-summary-area.summary-only-box {
+    flex: 1;
+    position: sticky;
+    top: 20px; 
+    padding: 25px;
+    border: 1px solid #EAE0D7; /* ⭐️ 밝은 브라운 경계선 */
+    border-radius: 12px;
+    background-color: #FFFFFF; /* 흰색 배경 유지 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.order-summary-area.summary-only-box h2 {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #4A4A4A;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+/*
+ * ----------------------------------------------------
+ * ⭐️ 좌측의 개별 섹션 스타일 (.section-box)
+ * ----------------------------------------------------
+ */
+.section-box {
+    border: 1px solid #EAE0D7; /* ⭐️ 밝은 브라운 경계선 */
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.section-box h2 {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #4A4A4A;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #D98880; /* ⭐️ 테라코타 강조선 */
+}
+
+/*
+ * ----------------------------------------------------
+ * 1. 배송 정보 입력 (.shipping-info-area)
+ * ----------------------------------------------------
+ */
+.order-form .form-group {
+    margin-bottom: 15px;
+}
+
+.order-form label {
+    display: block;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #6B6B6B; /* 부드러운 텍스트 색상 */
+    margin-bottom: 5px;
+}
+
+.order-form input[type="text"],
+.order-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #D1CDC7; /* ⭐️ 연한 웜 그레이 경계선 */
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.order-form input:focus,
+.order-form textarea:focus {
+    border-color: #D98880; /* ⭐️ 포커스 시 테라코타 */
+    outline: none;
+}
+
+/*
+ * ----------------------------------------------------
+ * 2. 주문 상품 정보 (.product-list-area)
+ * ----------------------------------------------------
+ */
+.product-list-area .summary-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.product-list-area .summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #F0F0F0;
+    font-size: 0.95em;
+}
+
+.summary-item .item-name {
+    flex: 1;
+    font-weight: 500;
+    color: #4A4A4A;
+}
+
+.summary-item .item-price {
+    width: 100px;
+    text-align: right;
+    font-weight: 600;
+    color: #4A4A4A;
+}
+
+/*
+ * ----------------------------------------------------
+ * 3. 결제 수단 선택 (.payment-method-area)
+ * ----------------------------------------------------
+ */
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 5px;
+}
+
+.payment-options label:hover {
+    background-color: #F7F3F0; /* ⭐️ 따뜻한 베이지 hover */
+}
+
+.payment-options input[type="radio"] {
+    margin-right: 10px;
+    accent-color: #D98880; /* ⭐️ 라디오 버튼 테라코타 */
+    transform: scale(1.1);
+}
+
+/* 무통장 입금 상세 정보 */
+.bank-info-details {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #FFF8F3; /* ⭐️ 매우 밝은 웜 핑크 배경 */
+    border: 1px dashed #D98880; /* ⭐️ 테라코타 점선 */
+    border-radius: 6px;
+    font-size: 0.9em;
+    color: #4A4A4A;
+}
+
+.bank-info-details .warning-text {
+    color: #E74C3C; /* 경고색은 눈에 띄게 유지 */
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+/*
+ * ----------------------------------------------------
+ * 4. 금액 계산 및 최종 결제 (.order-summary-area)
+ * ----------------------------------------------------
+ */
+ 
+ .order-summary-area{
+    height: 1015px;
+ }
+ .order-summary-area >h2{
+    margin-top: 30px;
+ }
+.summary-calculation {
+    border-top: 1px solid #EAE0D7;
+    border-bottom: 1px solid #EAE0D7;
+    padding: 50px 10px;
+    margin-top: 50px;
+    line-height: 50px;
+}
+
+.calculation-line .value {
+    font-weight: 600;
+    color: #4A4A4A;
+    font-size: 1.2rem;
+    float: right;
+
+}
+
+/* 최종 결제 박스 */
+.final-total-box {
+    border-top: 2px solid #D98880; /* ⭐️ 테라코타 강조 */
+     margin-top: 464px;
+     padding-top: 10px;
+     
+}
+
+.final-total-box .label {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #4A4A4A;
+    padding-left: 10px;
+    line-height: 50px;
+    
+    
+}
+
+.final-total-box .final-value {
+    font-size: 1.8em;
+    font-weight: 800;
+    color: #D98880; /* ⭐️ 최종 금액 테라코타 */
+   float: right;
+
+}
+
+
+/* 결제 버튼 */
+.payment-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #fff;
+    background-color: #D98880; /* ⭐️ 테라코타 버튼 */
+    border: none;
+    border-radius: 8px;
+}
+
+.payment-btn:hover:not(:disabled) {
+    background-color: #C06C84; /* ⭐️ 톤 다운된 핑크 hover */
+}
+
+.payment-btn:disabled {
+    background-color: #D1CDC7; /* ⭐️ 비활성화 시 연한 웜 그레이 */
+    opacity: 1; 
+}
+
+/*
+ * ----------------------------------------------------
+ * 반응형 디자인 (유지)
+ * ----------------------------------------------------
+ */
+@media (max-width: 1024px) {
+    
+    /* 1. 컨테이너의 최대 너비 제한을 풀고 여백을 줄여 Full-Width 효과 */
+    .checkout-container {
+        max-width: none; /* 최대 너비 제한 해제 */
+        width: 100%;    /* 폭을 전체로 */
+        padding: 0 15px; /* 좌우 여백을 줄임 */
+    }
+
+    /* 2. 좌우 분할을 세로 쌓기로 변경 */
+    .checkout-content {
+        flex-direction: column;
+        gap: 25px; /* 세로 간격 조정 */
+    }
+
+    /* 3. 각 영역이 100% 폭을 차지하도록 설정하고 sticky 해제 */
+    .main-order-info-area,
+    .order-summary-area.summary-only-box {
+        flex: none; /* flex 비율 제거 */
+        width: 100%; /* 폭 100% */
+        position: static; /* sticky 해제 */
+        min-width: 0;
+    }
+    
+    /* 4. 최종 요약 섹션의 내부 스타일 조정 (선택적) */
+    .order-summary-area.summary-only-box {
+        order: 100; /* 최종 결제 금액 박스를 가장 아래로 배치 (Flexbox의 order 이용) */
+        margin-top: 0; 
+        margin-bottom: 25px;         
+    }
+    .final-total-box {
+        margin: 30px 0 15px 0;
+    }
+     .order-summary-area{
+        height: inherit;
+     }
+}

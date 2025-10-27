@@ -1,0 +1,412 @@
+/* ====================================================
+   MyOrdersPage.tsx를 위한 파스텔 핑크/골드 테마 CSS (Width 100% 단일 카드 형식)
+   ==================================================== */
+
+/* -------------------- 전역 변수 참조 -------------------- */
+:root {
+    --primary-pastel: #FFC0CB; /* 블러시 핑크 (주조색/버튼) */
+    --secondary-pastel: #FEE7F2; /* 더 연한 핑크 (배경/위젯) */
+    --accent-gold: #B8860B; /* 강조색 (가격/중요 정보) */
+    --light-gray: #EEE; /* 구분선 */
+    --dark-text: #333; /* 짙은 텍스트 */
+    --medium-gray: #555;
+}
+
+/* -------------------- 기본 레이아웃 -------------------- */
+.my-orders-container {
+    background-color: #F8F8F8;
+    min-height: 100vh;
+    padding-top: 2.5rem; 
+    padding-bottom: 2.5rem; 
+    font-family: sans-serif;
+}
+
+.max-w-4xl { max-width: 56rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+
+/* -------------------- 제목 스타일 -------------------- */
+.main-title {
+    font-size: 1.875rem; 
+    font-weight: 700; 
+    color: var(--dark-text); 
+    margin-bottom: 2rem; 
+    border-bottom: 2px solid var(--primary-pastel); 
+    padding-bottom: 1rem; 
+    text-align: center;
+}
+
+/* -------------------- 주문 목록 (Width 100% 단일 열 그리드) -------------------- */
+.order-list-grid {
+    display: grid;
+    /* ⭐️ minmax(300px, 1fr) 대신 minmax(100%, 1fr) 또는 1fr로 설정하여 한 줄에 하나만 표시 */
+    grid-template-columns: 1fr; 
+    gap: 1.5rem; /* 카드 사이 간격 유지 */
+}
+
+/* -------------------- 개별 주문 카드 (Width 100%) -------------------- */
+.order-card {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    /* shadow-md 대체 */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06); 
+    /* border-t-4 border-indigo-500 대체 */
+    border-top: 4px solid var(--primary-pastel);
+    transition: all 0.2s ease-in-out;
+    /* width: 100%가 기본적으로 적용됨 */
+}
+
+.order-card:hover {
+    /* hover:shadow-lg 대체 */
+    box-shadow: 0 6px 10px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px); /* 약간 더 강조된 호버 효과 */
+}
+
+/* -------------------- 카드 헤더 -------------------- */
+.order-header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--light-gray);
+    padding-bottom: 0.75rem;
+}
+
+.order-date-label {
+    font-size: 0.75rem;
+    color: #888;
+}
+
+.order-id-display {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-pastel);
+}
+
+/* -------------------- 상태 배지 -------------------- */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    height: fit-content;
+    white-space: nowrap;
+}
+
+/* 💡 상태별 테마 색상 (CSS 변수 매핑) */
+.bg-green-100 { /* 결제 완료, 배송 준비 중 */
+    background-color: var(--secondary-pastel); 
+    color: var(--dark-text); 
+    border: 1px solid var(--primary-pastel);
+}
+.bg-yellow-100 { /* 배송 중 */
+    background-color: #FFFBEB; 
+    color: var(--accent-gold); 
+    border: 1px solid #FCD34D;
+}
+.bg-gray-100 { /* 주문 취소 등 */
+    background-color: #F3F4F6;
+    color: #4B5563;
+}
+
+
+/* -------------------- 카드 바디 -------------------- */
+.order-body {
+    margin-bottom: 1.5rem;
+    /* space-y-2 대체 */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.item-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--dark-text);
+}
+
+.total-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--light-gray);
+}
+
+.total-label {
+    color: var(--medium-gray);
+}
+
+.total-amount-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-gold); /* 골드 강조 */
+}
+
+/* -------------------- 상세 보기 버튼 -------------------- */
+.order-actions {
+    margin-top: 1rem;
+    text-align: right;
+}
+
+.detail-button {
+    font-size: 0.875rem;
+    color: var(--primary-pastel);
+    font-weight: 500;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.detail-button:hover {
+    color: #fa6c92;
+    background: none;
+}
+
+/* -------------------- 주문 내역 없음 (Empty State) -------------------- */
+.empty-orders {
+    text-align: center;
+    padding: 5rem 2rem;
+    border: 1px dashed var(--primary-pastel);
+    border-radius: 0.5rem;
+    background-color: #fff;
+    color: var(--medium-gray);
+    font-size: 1.25rem;
+    margin-top: 2rem;
+}
+
+.empty-orders p {
+    margin-bottom: 1.5rem;
+}
+
+.go-to-main-btn {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary-pastel);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background-color 0.2s;
+}
+
+.go-to-main-btn:hover {
+    background-color: #FFB3C7;
+}
+
+/* -------------------- 로딩 및 에러 메시지 -------------------- */
+.loading-message {
+    text-align: center;
+    padding: 5rem 0;
+    font-size: 1.125rem;
+    color: var(--dark-text);
+}
+
+.error-message {
+    text-align: center;
+    padding: 5rem 0;
+    font-size: 1.125rem;
+    color: #ef4444; 
+}
+
+/* ====================================================
+   OrderDetailPage 스타일 (MyOrders.css에 추가)
+   ==================================================== */
+.detail-page-wrapper {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.detail-section {
+    padding: 1.5rem;
+    border: 1px solid var(--secondary-pastel); /* 연한 핑크색 테두리 */
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    background-color: var(--secondary-pastel); /* 연한 핑크색 배경 */
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--dark-text);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--light-gray);
+    padding-bottom: 0.5rem;
+}
+
+/* 폰트어썸 아이콘 색상 */
+.icon-pink {
+    color: var(--primary-pastel);
+    margin-right: 0.5rem;
+}
+
+/* -------------------- 주문 요약 섹션 -------------------- */
+.order-summary-box {
+    background-color: #fff;
+    border-top: 4px solid var(--primary-pastel);
+    border: 1px solid var(--primary-pastel);
+    padding: 1.5rem;
+}
+
+.summary-text {
+    font-size: 0.95rem;
+    color: var(--medium-gray);
+    margin-bottom: 0.5rem;
+}
+
+.final-total-display {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--dark-text);
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--light-gray);
+}
+
+.final-total-display .total-amount-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--accent-gold); /* 골드 강조 */
+    margin-left: 0.5rem;
+}
+
+/* -------------------- 상품 목록 섹션 -------------------- */
+.product-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.product-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px dashed #ddd;
+}
+
+.product-item:last-child {
+    border-bottom: none;
+}
+
+.product-info {
+    flex-grow: 1;
+}
+
+.product-name {
+    font-weight: 500;
+    color: var(--dark-text);
+    margin: 0;
+}
+
+.product-qty {
+    font-size: 0.85rem;
+    color: var(--medium-gray);
+    margin: 0;
+}
+
+.product-subtotal {
+    font-weight: 700;
+    color: var(--dark-text);
+}
+
+/* -------------------- 배송 및 결제 그리드 -------------------- */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-dl {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 0.5rem 1rem;
+    font-size: 0.95rem;
+}
+
+.info-dl dt {
+    font-weight: 600;
+    color: var(--medium-gray);
+}
+
+.final-total-dt {
+    color: var(--primary-pastel);
+    font-size: 1.1rem;
+}
+.final-total-dd {
+    color: var(--accent-gold);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.payment-method-p {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--light-gray);
+    font-weight: 500;
+    color: var(--dark-text);
+}
+
+.method-highlight {
+    font-weight: 700;
+    color: var(--primary-pastel);
+}
+
+
+/* -------------------- 액션 버튼 -------------------- */
+.mt-10 { margin-top: 2.5rem; }
+
+.go-to-list-btn {
+    padding: 0.75rem 1.5rem;
+    background-color: #F3F4F6;
+    color: var(--dark-text);
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    margin-right: 1rem;
+}
+
+.go-to-list-btn:hover {
+    background-color: #e5e7eb;
+}
+
+.cancel-order-btn {
+    padding: 0.75rem;
+    background-color: #ff9999; /* 연한 빨강 */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.cancel-order-btn:hover {
+    background-color: #ff6666;
+}
+
+/* -------------------- 반응형 (모바일) -------------------- */
+@media (max-width: 640px) {
+    .detail-page-wrapper {
+        padding: 1rem;
+    }
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    .order-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    .go-to-list-btn, .cancel-order-btn {
+        width: 100%;
+        margin-right: 0;
+    }
+}

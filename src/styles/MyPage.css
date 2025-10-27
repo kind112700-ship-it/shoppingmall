@@ -1,0 +1,243 @@
+/* 기본 리셋 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 헤더 & 푸터 */
+header {
+    background-color: #ffffff;
+    padding: 20px 40px;
+    border-bottom: 1px solid #eee;
+}
+header h1 {
+    color: #3f51b5; /* 브랜드 색상 */
+    font-size: 24px;
+}
+
+
+/* 마이 페이지 컨테이너 */
+.my-page-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 30px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    min-height: 70vh;
+}
+
+/* 사이드바 (메뉴) */
+.sidebar {
+    width: 250px;
+    padding: 30px 20px;
+    border-right: 1px solid #eee;
+    background-color: #f9f9f9;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.user-profile {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #ddd;
+}
+.profile-image {
+    width: 80px;
+    height: 80px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: #999;
+}
+.user-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.user-level {
+    font-size: 14px;
+    color: #f44336; /* 강조 색상 */
+    font-weight: 500;
+}
+.logout-btn {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #999;
+    text-decoration: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.menu-list ul {
+    list-style: none;
+}
+.menu-list a {
+    display: block;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #555;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+}
+.menu-list a:hover {
+    background-color: #eceff1;
+    color: #3f51b5;
+}
+.menu-list a.active {
+    background-color: #3f51b5; /* 활성화 메뉴 색상 */
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* 메인 콘텐츠 */
+.main-content {
+    flex-grow: 1;
+    padding: 30px 40px;
+}
+.main-content h2 {
+    font-size: 28px;
+    color: #222;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* 요약 카드 그룹 */
+.summary-card-group {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+.summary-card {
+    flex: 1;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+.summary-card h3 {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 10px;
+}
+.summary-card .data-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: #3f51b5;
+    margin-bottom: 5px;
+}
+.summary-card .data-detail {
+    font-size: 13px;
+    color: #999;
+}
+
+/* 최근 주문 내역 */
+.recent-orders h3 {
+    font-size: 20px;
+    color: #444;
+    margin-bottom: 15px;
+}
+.order-list {
+    border-top: 2px solid #3f51b5;
+}
+.order-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+}
+.order-item p, .order-item span, .order-item a {
+    flex: 1;
+}
+.order-item .order-date { flex: 1.5; color: #777; }
+.order-item .order-name { flex: 3; font-weight: 500; }
+.order-item .order-price { flex: 1.5; text-align: right; font-weight: 700; }
+.order-item .order-status { flex: 1; text-align: center; padding: 5px; background-color: #e3f2fd; color: #1e88e5; border-radius: 4px; font-size: 13px; }
+.order-item .detail-link { flex: 1; text-align: right; color: #3f51b5; text-decoration: none; font-size: 14px; }
+
+/* ================================== */
+/* 📱 미디어 쿼리 (모바일 반응형) 적용 시작 */
+/* ================================== */
+@media (max-width: 768px) {
+    /* 전체 컨테이너를 수직(column)으로 변경 */
+    .my-page-container {
+        flex-direction: column;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    /* 사이드바를 전체 너비로 확장하고 가로 메뉴로 변경 */
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        border-radius: 0;
+        padding: 20px; /* 패딩 조정 */
+    }
+    
+    .menu-list ul {
+        display: flex; /* 메뉴 항목 가로 배치 */
+        flex-wrap: wrap; /* 항목이 넘치면 다음 줄로 */
+        justify-content: space-around;
+        gap: 8px; /* 항목 간격 조정 */
+    }
+    .menu-list li {
+        flex: 1 1 calc(50% - 10px); /* 2개씩 표시 */
+        max-width: calc(50% - 10px);
+    }
+    .menu-list a {
+        text-align: center;
+        padding: 8px 5px; /* 메뉴 패딩 줄이기 */
+        font-size: 14px;
+    }
+
+    /* 메인 콘텐츠 패딩 조정 */
+    .main-content {
+        padding: 20px;
+    }
+
+    /* 요약 카드들을 세로로 나열 */
+    .summary-card-group {
+        flex-direction: column;
+    }
+
+    /* 주문 항목 모바일 최적화 */
+    .order-item {
+        flex-wrap: wrap; /* 항목을 두 줄로 나누기 */
+        justify-content: space-between;
+        padding: 10px 0;
+        font-size: 14px;
+    }
+    
+    /* 항목별 너비와 정렬 재설정 */
+    .order-item p, .order-item span, .order-item a {
+        flex: auto;
+        width: 50%; /* 기본적으로 2개씩 배치 */
+        margin-bottom: 5px;
+        text-align: left;
+    }
+    .order-item .order-price, .order-item .detail-link {
+        text-align: right;
+    }
+    .order-item .order-status {
+        width: 100%; /* 상태는 한 줄 전체 사용 */
+        text-align: center;
+    }
+}
