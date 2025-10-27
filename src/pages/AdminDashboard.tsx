@@ -1,14 +1,44 @@
 // src/pages/AdminDashboard.tsx
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { API_BASE_URL } from '../api/config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
     faUserCircle, faWonSign, faShoppingCart, 
     faUserPlus, faExclamationTriangle 
 } from '@fortawesome/free-solid-svg-icons';
 import AdminSidebar from '../components/admin/AdminSidebar';
+import { Product} from '../types'; 
 
 const AdminDashboard: React.FC = () => {
+    const [products, setProducts] = useState<Product[]>([]); // 상품 목록 상태
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    // ⭐️ 상품 목록 API 호출 로직 추가 (useEffect 사용)
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                // ⭐️ 올바른 API 호출: Vercel 주소(API_BASE_URL)를 사용합니다.
+                const response = await axios.get<Product[]>(`${API_BASE_URL}/admin/products`); 
+                setProducts(response.data);
+                setLoading(false);
+            } catch (err) {
+                console.error("Failed to fetch products:", err);
+                setError("상품 데이터를 불러오는 데 실패했습니다.");
+                setLoading(false);
+            }
+        };
+
+        fetchProducts();
+    }, []); // 컴포넌트 마운트 시 한 번만 실행
+
+    // (현재는 데이터를 사용하는 부분이 없으므로, 로딩/에러 메시지만 추가)
+    if (loading) return <div>상품 로딩 중...</div>;
+    if (error) return <div>에러: {error}</div>;
+
+    
     return (
         <div className="admin-wrapper">
             
